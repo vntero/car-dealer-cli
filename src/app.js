@@ -1,5 +1,8 @@
-import inquirer from 'inquirer'
 import { Command } from 'commander'
+
+const query = new Command()
+
+const cars = []
 
 // send welcome message to user
 console.log(
