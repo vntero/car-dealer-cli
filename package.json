@@ -1,6 +1,7 @@
 {
   "name": "car-dealer-cli",
   "version": "1.0.0",
+  "type": "module",
   "description": "Node app that reads a file and returns a computed feedback",
   "main": ".prettierrc.js",
   "scripts": {
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/vntero/car-dealer-cli/issues"
   },
-  "homepage": "https://github.com/vntero/car-dealer-cli#readme"
+  "homepage": "https://github.com/vntero/car-dealer-cli#readme",
+  "dependencies": {
+    "commander": "^12.1.0",
+    "inquirer": "^9.2.23"
+  }
 }
