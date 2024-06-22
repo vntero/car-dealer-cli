@@ -19,6 +19,7 @@
   "homepage": "https://github.com/vntero/car-dealer-cli#readme",
   "dependencies": {
     "commander": "^12.1.0",
+    "csv-parser": "^3.0.0",
     "inquirer": "^9.2.23"
   }
 }
