@@ -2,13 +2,7 @@ import { Command } from 'commander'
 import path from 'path'
 import csv from 'csv-parser'
 import fs from 'fs'
-import {
-  cars,
-  countCarsByBrand,
-  listCarsByBrand,
-  listCarsByMileageRange,
-  getTotalValueByDealership,
-} from './usecases.js'
+import { cars } from './usecases.js'
 
 const query = new Command()
 
@@ -26,43 +20,11 @@ const readData = async (filePath) => {
   })
 }
 
-// PROMPTS
-query
-  .command('count-cars-by-brand <brand>')
-  .description('Counts the number of cars by brand (parameter: brand)')
-  .action((brand) => {
-    countCarsByBrand(brand)
-  })
-
-query
-  .command('list-cars-by-brand <brand>')
-  .description(
-    'Gets the number of cars and the list of cars by brand (parameter: brand)',
-  )
-  .action((brand) => {
-    listCarsByBrand(brand)
-  })
-
-query
-  .command('list-cars-by-mileage-range <minMileage> <maxMileage>')
-  .description(
-    'Counts the number of cars and lists them by mileage range (parameter: maxMileage, minMileage)',
-  )
-  .action((minMileage, maxMileage) => {
-    listCarsByMileageRange(minMileage, maxMileage)
-  })
-
-query
-  .command('total-value-by-dealership <dealership>')
-  .description('Gets the total value of cars that exist in a given dealership')
-  .action((dealership) => {
-    getTotalValueByDealership(dealership)
-  })
-
 const main = async () => {
-  const filePath = path.resolve('./src/data/cars.csv')
+  const data = path.resolve('./src/data/cars.csv')
   try {
-    await readData(filePath)
+    await readData(data)
+    setupCommands()
     query.parse(process.argv)
   } catch (err) {
     console.error('Failed to load CSV file', err)
