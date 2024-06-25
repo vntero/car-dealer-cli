@@ -1,28 +1,44 @@
 import { cars } from '../data/loadData.js'
+import { numberValidation, stringValidation } from './validation.js'
+
+const processCarsByBrand = (brand, actionType) => {
+  if (!stringValidation(brand)) {
+    return console.error('Input must be a non-empty string.')
+  }
+
+  brand = brand.trim().toUpperCase()
+  const filteredCarsByBrand = cars.filter((car) => car.Car === brand)
+  const uniqueBrands = [...new Set(cars.map((car) => car.Car))]
+
+  if (filteredCarsByBrand.length === 0) {
+    console.log(
+      `Currently there are no ${brand} cars to be ${actionType}. Here's a list of available brands: ${uniqueBrands}.`,
+    )
+  } else {
+    if (actionType === 'counted') {
+      console.log(
+        `There is a total of ${filteredCarsByBrand.length} ${brand} cars.`,
+      )
+    } else if (actionType === 'listed') {
+      console.log(
+        `There is a total of ${filteredCarsByBrand.length} ${brand} cars. Find them listed below: ${JSON.stringify(filteredCarsByBrand, null, 2)}`,
+      )
+    }
+  }
+}
 
 export const countCarsByBrand = (brand) => {
-  const filteredCarsByBrand = cars.filter((car) => car.Car === brand)
-  console.log(
-    `For the brand ${brand}, the dealership has a total of ${filteredCarsByBrand.length} cars.`,
-  )
+  processCarsByBrand(brand, 'counted')
 }
 
 export const listCarsByBrand = (brand) => {
-  const filteredCarsByBrand = cars.filter((car) => car.Car === brand)
-
-  filteredCarsByBrand.length === 0
-    ? console.log(
-        `For the brand ${brand}, the dealership has a total of ${filteredCarsByBrand.length} cars.`,
-      )
-    : console.log(
-        `For the brand ${brand}, the dealership has a total of ${filteredCarsByBrand.length} cars. Find them listed below: ${JSON.stringify(filteredCarsByBrand, null, 2)}`,
-      )
+  processCarsByBrand(brand, 'listed')
 }
 
 export const listCarsByMileageRange = (minMileage, maxMileage) => {
-  if (isNaN(minMileage) || isNaN(maxMileage)) {
+  if (!numberValidation(minMileage) || !numberValidation(maxMileage)) {
     return console.error(
-      'Error: Both minMileage and maxMileage must be valid numbers.',
+      'Both minMileage and maxMileage must be valid numbers.',
     )
   }
   const filteredCarsByMileageRange = cars.filter(
@@ -39,11 +55,16 @@ export const listCarsByMileageRange = (minMileage, maxMileage) => {
 
 export const getTotalValueByDealership = (dealership) => {
   const filteredCars = cars.filter((car) => car.Dealership === dealership)
+  const uniqueDealerships = [...new Set(cars.map((car) => car.Dealership))]
   const totalValue = filteredCars.reduce(
     (sum, car) => sum + parseFloat(car.Price),
     0,
   )
-  console.log(
-    `The total value of cars in the "${dealership}" dealership is: €${totalValue}`,
-  )
+  filteredCars.length === 0
+    ? console.log(
+        `Currently there is no "${dealership}" dealership in our records. Here's a list of available dealerships: ${uniqueDealerships}. Also, make sure you add quotation marks for searching dealerships with more than one word.`,
+      )
+    : console.log(
+        `The total value of cars in the "${dealership}" dealership is: €${totalValue}`,
+      )
 }
