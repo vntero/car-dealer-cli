@@ -27,13 +27,19 @@ const listCarsByBrand = (brand) => {
 }
 
 const listCarsByMileageRange = (minMileage, maxMileage) => {
-  const filteredCars = cars.filter(
-    (car) => car.mileage >= minMileage && car.mileage <= maxMileage,
+  const filteredCarsByMileageRange = cars.filter(
+    (car) => car.Mileage >= minMileage && car.Mileage <= maxMileage,
   )
-  console.log(
-    `Number of cars with mileage between ${minMileage} and ${maxMileage}: ${filteredCars.length}`,
-  )
-  console.log(`Here's a list of the ${brand} cars we have: `)
+  if (filteredCarsByMileageRange.length === 0) {
+    console.log(
+      `Number of cars with mileage between ${minMileage} and ${maxMileage}: ${filteredCarsByMileageRange.length}`,
+    )
+  } else {
+    console.log(
+      `Number of cars with mileage between ${minMileage} and ${maxMileage}: ${filteredCarsByMileageRange.length}`,
+    )
+    console.log(`Find them listed below: ${filteredCarsByMileageRange}`)
+  }
 }
 
 const getTotalValueByDealership = (dealership) => {
