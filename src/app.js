@@ -96,7 +96,6 @@ query
     listCarsByMileageRange(minMileage, maxMileage)
   })
 
-// ---------- make sure that user knows which dealerships are there
 query
   .command('total-value-by-dealership <dealership>')
   .description('Get the total value of cars that exist in a given dealership')
