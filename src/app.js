@@ -19,14 +19,11 @@ const getCarsByBrand = (brand) => {
 }
 
 const listCarsByBrand = (brand) => {
-  const filteredCarsByBrand = cars.filter((car) => car.brand === brand)
+  const filteredCarsByBrand = cars.filter((car) => car.Car === brand)
   console.log(
-    `For the brand you entered, the dealership has a total of ${filteredCarsByBrand.length} cars`,
+    `For the brand ${brand}, the dealership has a total of ${filteredCarsByBrand.length} cars`,
   )
-  console.log(
-    `Here's a list of the ${brand} cars we have: `,
-    filteredCarsByBrand,
-  )
+  console.log(`Find them listed below: `, filteredCarsByBrand)
 }
 
 const listCarsByMileageRange = (minMileage, maxMileage) => {
