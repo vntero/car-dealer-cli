@@ -1,4 +1,4 @@
-export const cars = []
+import { cars } from '../data/loadData.js'
 
 export const countCarsByBrand = (brand) => {
   const filteredCarsByBrand = cars.filter((car) => car.Car === brand)
