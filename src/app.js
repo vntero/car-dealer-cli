@@ -46,13 +46,13 @@ const listCarsByMileageRange = (minMileage, maxMileage) => {
 }
 
 const getTotalValueByDealership = (dealership) => {
-  const filteredCars = cars.filter((car) => car.dealership === dealership)
+  const filteredCars = cars.filter((car) => car.Dealership === dealership)
   const totalValue = filteredCars.reduce(
-    (sum, car) => sum + parseFloat(car.price),
+    (sum, car) => sum + parseFloat(car.Price),
     0,
   )
   console.log(
-    `Total value of cars in the "${dealership}" dealership is: €${totalValue}`,
+    `The total value of cars in the "${dealership}" dealership is: €${totalValue}`,
   )
 }
 
