@@ -6,12 +6,15 @@ import fs from 'fs'
 const query = new Command()
 
 const cars = []
+console.log('🔥🔥🔥 ~ cars:', cars)
 
 // USECASES
 const getCarsByBrand = (brand) => {
-  const filteredCarsByBrand = cars.filter((car) => car.brand === brand)
+  console.log('🔥🔥🔥 ~ brand:', brand)
+  console.log('🔥🔥🔥 ~ cars:', cars)
+  const filteredCarsByBrand = cars.filter((car) => car.Car === brand)
   console.log(
-    `For the brand you entered, the dealership has a total of ${filteredCarsByBrand.length} cars`,
+    `For the brand ${brand}, the dealership has a total of ${filteredCarsByBrand.length} cars`,
   )
 }
 
@@ -53,7 +56,10 @@ const readData = async (filePath) => {
     const stream = fs
       .createReadStream(filePath)
       .pipe(csv())
-      .on('data', (data) => cars.push(data))
+      .on('data', (data) => {
+        console.log('🔥🔥🔥 ~ .on ~ data:', data)
+        cars.push(data)
+      })
       .on('end', () => resolve(cars))
       .on('error', (err) => reject(err))
   })
