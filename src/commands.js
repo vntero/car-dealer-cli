@@ -6,17 +6,17 @@ import {
   getTotalValueByDealership,
 } from './usecases.js'
 
-export const query = new Command()
+export const cli = new Command()
 
 export const setupCommands = () => {
-  query
+  cli
     .command('count-cars-by-brand <brand>')
     .description('Counts the number of cars by brand (parameter: brand)')
     .action((brand) => {
       countCarsByBrand(brand)
     })
 
-  query
+  cli
     .command('list-cars-by-brand <brand>')
     .description(
       'Gets the number of cars and the list of cars by brand (parameter: brand)',
@@ -25,7 +25,7 @@ export const setupCommands = () => {
       listCarsByBrand(brand)
     })
 
-  query
+  cli
     .command('list-cars-by-mileage-range <minMileage> <maxMileage>')
     .description(
       'Counts the number of cars and lists them by mileage range (parameter: maxMileage, minMileage)',
@@ -34,7 +34,7 @@ export const setupCommands = () => {
       listCarsByMileageRange(minMileage, maxMileage)
     })
 
-  query
+  cli
     .command('total-value-by-dealership <dealership>')
     .description(
       'Gets the total value of cars that exist in a given dealership',

@@ -2,9 +2,8 @@ import path from 'path'
 import csv from 'csv-parser'
 import fs from 'fs'
 import { cars } from './usecases.js'
-import { setupCommands, query } from './commands.js'
+import { setupCommands, cli } from './commands.js'
 
-// READ THE CSV FILE
 const readData = async (filePath) => {
   return new Promise((resolve, reject) => {
     const stream = fs
@@ -14,7 +13,7 @@ const readData = async (filePath) => {
         cars.push(data)
       })
       .on('end', () => resolve(cars))
-      .on('error', (err) => reject(err))
+      .on('error', (err) => reject(`Error reading CSV file: ${err.message}`))
   })
 }
 
@@ -23,7 +22,7 @@ const main = async () => {
   try {
     await readData(data)
     setupCommands()
-    query.parse(process.argv)
+    cli.parse(process.argv)
   } catch (err) {
     console.error('Failed to load CSV file', err)
   }
