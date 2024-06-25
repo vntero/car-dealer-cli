@@ -18,13 +18,12 @@ const countCarsByBrand = (brand) => {
 const listCarsByBrand = (brand) => {
   const filteredCarsByBrand = cars.filter((car) => car.Car === brand)
 
-  filteredCarsByBrand === 0
+  filteredCarsByBrand.length === 0
     ? console.log(
         `For the brand ${brand}, the dealership has a total of ${filteredCarsByBrand.length} cars.`,
       )
     : console.log(
-        `For the brand ${brand}, the dealership has a total of ${filteredCarsByBrand.length} cars. Find them listed below: `,
-        filteredCarsByBrand,
+        `For the brand ${brand}, the dealership has a total of ${filteredCarsByBrand.length} cars. Find them listed below: ${JSON.stringify(filteredCarsByBrand, null, 2)}`,
       )
 }
 
