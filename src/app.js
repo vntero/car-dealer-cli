@@ -7,11 +7,6 @@ const query = new Command()
 
 const cars = []
 
-// // send welcome message to user
-// console.log(
-//   'Hey there, stranger! I am here to help you find out more about our fleet. Write <help> to know all the commands available.',
-// )
-
 // Usecases
 // ----- get the number of cars by brand (parameter: brand)
 const getCarsByBrand = (brand) => {
@@ -69,13 +64,6 @@ const readData = async (filePath) => {
 }
 
 // execute commands
-// ----- help
-query
-  .command('help')
-  .description('Displays the available functions and what they do')
-  .action(() => {
-    query.outputHelp()
-  })
 
 // ----- number-of-cars-by-brand
 query
