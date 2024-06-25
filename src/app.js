@@ -1,10 +1,8 @@
-import { Command } from 'commander'
 import path from 'path'
 import csv from 'csv-parser'
 import fs from 'fs'
 import { cars } from './usecases.js'
-
-const query = new Command()
+import { setupCommands, query } from './commands.js'
 
 // READ THE CSV FILE
 const readData = async (filePath) => {

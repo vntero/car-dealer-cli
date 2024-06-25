@@ -1,9 +1,12 @@
+import { Command } from 'commander'
 import {
   countCarsByBrand,
   listCarsByBrand,
   listCarsByMileageRange,
   getTotalValueByDealership,
 } from './usecases.js'
+
+export const query = new Command()
 
 export const setupCommands = () => {
   query
