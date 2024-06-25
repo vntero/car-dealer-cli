@@ -6,40 +6,44 @@ import fs from 'fs'
 const query = new Command()
 
 const cars = []
-console.log('🔥🔥🔥 ~ cars:', cars)
 
 // USECASES
-const getCarsByBrand = (brand) => {
-  console.log('🔥🔥🔥 ~ brand:', brand)
-  console.log('🔥🔥🔥 ~ cars:', cars)
+const countCarsByBrand = (brand) => {
   const filteredCarsByBrand = cars.filter((car) => car.Car === brand)
   console.log(
-    `For the brand ${brand}, the dealership has a total of ${filteredCarsByBrand.length} cars`,
+    `For the brand ${brand}, the dealership has a total of ${filteredCarsByBrand.length} cars.`,
   )
 }
 
 const listCarsByBrand = (brand) => {
   const filteredCarsByBrand = cars.filter((car) => car.Car === brand)
-  console.log(
-    `For the brand ${brand}, the dealership has a total of ${filteredCarsByBrand.length} cars`,
-  )
-  console.log(`Find them listed below: `, filteredCarsByBrand)
+
+  filteredCarsByBrand === 0
+    ? console.log(
+        `For the brand ${brand}, the dealership has a total of ${filteredCarsByBrand.length} cars.`,
+      )
+    : console.log(
+        `For the brand ${brand}, the dealership has a total of ${filteredCarsByBrand.length} cars. Find them listed below: `,
+        filteredCarsByBrand,
+      )
 }
 
 const listCarsByMileageRange = (minMileage, maxMileage) => {
+  if (isNaN(minMileage) || isNaN(maxMileage)) {
+    return console.error(
+      'Error: Both minMileage and maxMileage must be valid numbers.',
+    )
+  }
   const filteredCarsByMileageRange = cars.filter(
     (car) => car.Mileage >= minMileage && car.Mileage <= maxMileage,
   )
-  if (filteredCarsByMileageRange.length === 0) {
-    console.log(
-      `Number of cars with mileage between ${minMileage} and ${maxMileage}: ${filteredCarsByMileageRange.length}`,
-    )
-  } else {
-    console.log(
-      `Number of cars with mileage between ${minMileage} and ${maxMileage}: ${filteredCarsByMileageRange.length}`,
-    )
-    console.log(`Find them listed below: ${filteredCarsByMileageRange}`)
-  }
+  filteredCarsByMileageRange.length === 0
+    ? console.log(
+        `The dealership has a total of ${filteredCarsByMileageRange.length} cars with mileage between ${minMileage} and ${maxMileage}`,
+      )
+    : console.log(
+        `The dealership has a total of ${filteredCarsByMileageRange.length} cars with mileage between ${minMileage} and ${maxMileage}. Find them listed below: ${JSON.stringify(filteredCarsByMileageRange, null, 2)}`,
+      )
 }
 
 const getTotalValueByDealership = (dealership) => {
@@ -60,7 +64,6 @@ const readData = async (filePath) => {
       .createReadStream(filePath)
       .pipe(csv())
       .on('data', (data) => {
-        console.log('🔥🔥🔥 ~ .on ~ data:', data)
         cars.push(data)
       })
       .on('end', () => resolve(cars))
@@ -70,10 +73,10 @@ const readData = async (filePath) => {
 
 // PROMPTS
 query
-  .command('get-cars-by-brand <brand>')
+  .command('count-cars-by-brand <brand>')
   .description('Gets the number of cars by brand (parameter: brand)')
   .action((brand) => {
-    getCarsByBrand(brand)
+    countCarsByBrand(brand)
   })
 
 query
@@ -88,10 +91,10 @@ query
 query
   .command('list-cars-by-mileage-range <minMileage> <maxMileage>')
   .description(
-    'Get the number of cars and the list by mileage range (parameter: maxMileage, minMileage)',
+    'Count the number of cars and the list them by mileage range (parameter: maxMileage, minMileage)',
   )
   .action((minMileage, maxMileage) => {
-    listCarsByMileageRange(Number(minMileage), Number(maxMileage))
+    listCarsByMileageRange(minMileage, maxMileage)
   })
 
 // ---------- make sure that user knows which dealerships are there
@@ -101,12 +104,8 @@ query
   .action((dealership) => {
     getTotalValueByDealership(dealership)
   })
-
-const temp = './data/cars.csv'
 ;(async () => {
-  const filePath = path.resolve(
-    '/Users/vntero/Desktop/github/car-dealer-cli/src/data/cars.csv',
-  )
+  const filePath = path.resolve('./src/data/cars.csv')
   try {
     await readData(filePath)
     query.parse(process.argv)
