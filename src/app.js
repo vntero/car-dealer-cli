@@ -7,8 +7,7 @@ const query = new Command()
 
 const cars = []
 
-// Usecases
-// ----- get the number of cars by brand (parameter: brand)
+// USECASES
 const getCarsByBrand = (brand) => {
   const filteredCarsByBrand = cars.filter((car) => car.brand === brand)
   console.log(
@@ -16,7 +15,6 @@ const getCarsByBrand = (brand) => {
   )
 }
 
-// ----- get the number of cars and the list of cars by brand (parameter: brand)
 const listCarsByBrand = (brand) => {
   const filteredCarsByBrand = cars.filter((car) => car.brand === brand)
   console.log(
@@ -28,7 +26,6 @@ const listCarsByBrand = (brand) => {
   )
 }
 
-// ------ get the number of cars and the list by mileage range (parameter: maxMileage, minMileage)
 const listCarsByMileageRange = (minMileage, maxMileage) => {
   const filteredCars = cars.filter(
     (car) => car.mileage >= minMileage && car.mileage <= maxMileage,
@@ -39,7 +36,6 @@ const listCarsByMileageRange = (minMileage, maxMileage) => {
   console.log(`Here's a list of the ${brand} cars we have: `)
 }
 
-// ------ get the total value of cars that exist in a given dealership
 const getTotalValueByDealership = (dealership) => {
   const filteredCars = cars.filter((car) => car.dealership === dealership)
   const totalValue = filteredCars.reduce(
@@ -51,7 +47,7 @@ const getTotalValueByDealership = (dealership) => {
   )
 }
 
-// read the csv file
+// READ THE CSV FILE
 const readData = async (filePath) => {
   return new Promise((resolve, reject) => {
     const stream = fs
@@ -63,9 +59,7 @@ const readData = async (filePath) => {
   })
 }
 
-// execute commands
-
-// ----- number-of-cars-by-brand
+// PROMPTS
 query
   .command('get-cars-by-brand <brand>')
   .description('Gets the number of cars by brand (parameter: brand)')
@@ -73,7 +67,6 @@ query
     getCarsByBrand(brand)
   })
 
-// ----- list-of-cars-by-brand
 query
   .command('list-cars-by-brand <brand>')
   .description(
@@ -83,7 +76,6 @@ query
     listCarsByBrand(brand)
   })
 
-// ----- list-of-cars-by-mileage-range
 query
   .command('list-cars-by-mileage-range <minMileage> <maxMileage>')
   .description(
@@ -93,7 +85,6 @@ query
     listCarsByMileageRange(Number(minMileage), Number(maxMileage))
   })
 
-// ----- total-value-by-dealership
 // ---------- make sure that user knows which dealerships are there
 query
   .command('total-value-by-dealership <dealership>')
