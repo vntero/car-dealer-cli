@@ -11,28 +11,22 @@ const processCarsByBrand = (brand, actionType) => {
   const uniqueBrands = [...new Set(cars.map((car) => car.Car))]
 
   if (filteredCarsByBrand.length === 0) {
-    console.log(
-      `Currently there are no "${brand}" cars to be ${actionType}. Here's a list of available brands: ${uniqueBrands}.`,
-    )
+    return 0
   } else {
     if (actionType === 'counted') {
-      console.log(
-        `There is a total of ${filteredCarsByBrand.length} "${brand}" cars.`,
-      )
+      return filteredCarsByBrand.length
     } else if (actionType === 'listed') {
-      console.log(
-        `There is a total of ${filteredCarsByBrand.length} "${brand}" cars. Find them listed below: ${JSON.stringify(filteredCarsByBrand, null, 2)}`,
-      )
+      return JSON.stringify(filteredCarsByBrand, null, 2)
     }
   }
 }
 
 export const countCarsByBrand = (brand) => {
-  processCarsByBrand(brand, 'counted')
+  return processCarsByBrand(brand, 'counted')
 }
 
 export const listCarsByBrand = (brand) => {
-  processCarsByBrand(brand, 'listed')
+  return processCarsByBrand(brand, 'listed')
 }
 
 export const listCarsByMileageRange = (minMileage, maxMileage) => {

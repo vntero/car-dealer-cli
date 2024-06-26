@@ -1,34 +1,29 @@
 import { countCarsByBrand } from '../functions/usecases'
+import { loadData } from '../data/loadData'
+
+await loadData('./src/data/cars.csv')
 
 describe('countCarsByBrand', () => {
-  it('should count cars of a specific brand', () => {
-    const cars = [
-      {
-        Car: 'TESLA',
-        Dealership: 'Caetano Power',
-        Mileage: '19202',
-        Price: '42828',
-      },
-      {
-        Car: 'TESLA',
-        Dealership: 'Auto Machado',
-        Mileage: '19475',
-        Price: '21945',
-      },
-      {
-        Car: 'AUDI',
-        Dealership: 'Santogal Jump',
-        Mileage: '19026',
-        Price: '18776',
-      },
-    ]
-
-    const count = countCarsByBrand('TESLA')
-    expect(count).toBe(2)
+  it('should count cars of a specific brand', async () => {
+    const count = await countCarsByBrand('TESLA')
+    expect(count).toBe(121)
   })
 
   it('should return zero for a brand not in the list', () => {
-    const count = countCarsByBrand('BMW')
+    const count = countCarsByBrand('HUGO')
+    expect(count).toBe(0)
+  })
+})
+
+describe('countCarsByBrand', () => {
+  it('should count cars of a specific brand', async () => {
+    const data = await loadData('./src/data/cars.csv')
+    const count = await countCarsByBrand('TESLA')
+    expect(count).toBe(121)
+  })
+
+  it('should return zero for a brand not in the list', () => {
+    const count = countCarsByBrand('HUGO')
     expect(count).toBe(0)
   })
 })
