@@ -38,13 +38,7 @@ export const listCarsByMileageRange = (minMileage, maxMileage) => {
   const filteredCarsByMileageRange = cars.filter(
     (car) => car.Mileage >= minMileage && car.Mileage <= maxMileage,
   )
-  filteredCarsByMileageRange.length === 0
-    ? console.log(
-        `The dealership has a total of ${filteredCarsByMileageRange.length} cars with mileage between ${minMileage} and ${maxMileage}`,
-      )
-    : console.log(
-        `The dealership has a total of ${filteredCarsByMileageRange.length} cars with mileage between ${minMileage} and ${maxMileage}. Find them listed below: ${JSON.stringify(filteredCarsByMileageRange, null, 2)}`,
-      )
+  filteredCarsByMileageRange.length === 0 ? 0 : filteredCarsByMileageRange
 }
 
 export const getTotalValueByDealership = (dealership) => {
@@ -59,11 +53,5 @@ export const getTotalValueByDealership = (dealership) => {
     (sum, car) => sum + parseFloat(car.Price),
     0,
   )
-  filteredCarsByDealership.length === 0
-    ? console.log(
-        `Currently there is no "${dealership}" dealership in our records. Here's a list of available dealerships: ${uniqueDealerships}. Also, make sure to add quotation marks when searching dealerships with more than one word.`,
-      )
-    : console.log(
-        `The total value of cars in the "${dealership}" dealership is: €${totalValue}`,
-      )
+  filteredCarsByDealership.length === 0 ? 0 : totalValue
 }
