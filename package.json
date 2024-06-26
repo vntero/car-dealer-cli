@@ -5,7 +5,7 @@
   "description": "Node app that reads a file and returns a computed feedback",
   "main": ".prettierrc.js",
   "scripts": {
-    "test": "jest"
+    "test": "node --experimental-vm-modules ./node_modules/.bin/jest"
   },
   "repository": {
     "type": "git",
