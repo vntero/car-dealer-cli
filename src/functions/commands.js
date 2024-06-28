@@ -32,7 +32,13 @@ export const setupCommands = () => {
     )
     .action((brand) => {
       const response = listCarsByBrand(brand)
-      console.log(response)
+      response.count === 0
+        ? console.log(
+            `Currently there are no ${brand.trim().toUpperCase()} cars to be listed. Here's a list of available brands: ${response.availableBrands}.`,
+          )
+        : console.log(
+            `There is a total of ${response.length} ${brand.trim().toUpperCase()} cars. Find them listed below: ${JSON.stringify(response, null, 2)}`,
+          )
     })
 
   cli
