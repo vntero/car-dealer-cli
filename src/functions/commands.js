@@ -63,6 +63,13 @@ export const setupCommands = () => {
       'Gets the total value of cars that exist in a given dealership',
     )
     .action((dealership) => {
-      getTotalValueByDealership(dealership)
+      const response = getTotalValueByDealership(dealership)
+      response.count === 0
+        ? console.log(
+            `Currently there is no "${dealership}" dealership in our records. Here's a list of available dealerships: ${response.availableDealerships}. Also, make sure you add quotation marks for searching dealerships with more than one word.`,
+          )
+        : console.log(
+            `The total value of cars in the "${dealership}" dealership is: €${response}`,
+          )
     })
 }
