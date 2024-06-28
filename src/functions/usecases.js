@@ -11,7 +11,10 @@ const processCarsByBrand = (brand, actionType) => {
   const uniqueBrands = [...new Set(cars.map((car) => car.Car))]
 
   if (filteredCarsByBrand.length === 0) {
-    return 0
+    return {
+      count: 0,
+      availableBrands: uniqueBrands,
+    }
   } else {
     if (actionType === 'counted') {
       return filteredCarsByBrand.length

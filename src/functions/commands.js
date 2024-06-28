@@ -15,7 +15,14 @@ export const setupCommands = () => {
     .command('count-cars-by-brand <brand>')
     .description('Counts the number of cars by brand (parameter: brand)')
     .action((brand) => {
-      countCarsByBrand(brand)
+      const response = countCarsByBrand(brand)
+      response.count === 0
+        ? console.log(
+            `Currently there are no ${brand.trim().toUpperCase()} cars to be counted. Here's a list of available brands: ${response.availableBrands}.`,
+          )
+        : console.log(
+            `There is a total of ${response} ${brand.trim().toUpperCase()} cars.`,
+          )
     })
 
   cli
@@ -24,7 +31,8 @@ export const setupCommands = () => {
       'Gets the number of cars and the list of cars by brand (parameter: brand)',
     )
     .action((brand) => {
-      listCarsByBrand(brand)
+      const response = listCarsByBrand(brand)
+      console.log(response)
     })
 
   cli
