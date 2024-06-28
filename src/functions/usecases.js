@@ -16,7 +16,8 @@ const processCarsByBrand = (brand, actionType) => {
     if (actionType === 'counted') {
       return filteredCarsByBrand.length
     } else if (actionType === 'listed') {
-      return JSON.stringify(filteredCarsByBrand, null, 2)
+      // return JSON.stringify(filteredCarsByBrand, null, 2)
+      return filteredCarsByBrand
     }
   }
 }
