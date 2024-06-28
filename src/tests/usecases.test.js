@@ -2,6 +2,7 @@ import {
   countCarsByBrand,
   listCarsByBrand,
   listCarsByMileageRange,
+  getTotalValueByDealership,
 } from '../functions/usecases'
 import { loadData } from '../data/loadData'
 
@@ -62,5 +63,29 @@ describe('listCarsByMileageRange', () => {
   it('should return zero for a mileage range out of bounds', () => {
     const list = listCarsByMileageRange(0, 1)
     expect(list).toBe(0)
+  })
+})
+
+describe('getTotalValueByDealership', () => {
+  it('should get the total value of cars in a given dealership ', async () => {
+    const total = await getTotalValueByDealership('Santogal Jump')
+    expect(total).toBe(6204043)
+
+    const total1 = await getTotalValueByDealership('Cucujães Sport Auto')
+    expect(total1).toBe(6370799)
+
+    const total2 = await getTotalValueByDealership('Auto Jamor')
+    expect(total2).toBe(5754176)
+
+    const total3 = await getTotalValueByDealership('Caetano Power')
+    expect(total3).toBe(5700107)
+
+    const total4 = await getTotalValueByDealership('Auto Machado')
+    expect(total4).toBe(5925481)
+  })
+
+  it('should return zero for a dealership that does not exist', () => {
+    const total = getTotalValueByDealership('Automóveis Aljezur')
+    expect(total).toBe(0)
   })
 })
