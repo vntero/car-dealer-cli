@@ -11,6 +11,15 @@ import {
 export const cli = new Command()
 
 export const setupCommands = () => {
+  cli.on('--help', () => {
+    console.log('')
+    console.log('Examples:')
+    console.log('  $ node src/app.js count-cars-by-brand Audi')
+    console.log('  $ node src/app.js list-cars-by-brand BMW')
+    console.log('  $ node src/app.js list-cars-by-mileage-range 10000 50000')
+    console.log('  $ node src/app.js total-value-by-dealership "My Dealership"')
+  })
+
   cli
     .command('count-cars-by-brand <brand>')
     .description('Counts the number of cars by brand (parameter: brand)')
