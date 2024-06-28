@@ -47,7 +47,14 @@ export const setupCommands = () => {
       'Counts the number of cars and lists them by mileage range (parameter: maxMileage, minMileage)',
     )
     .action((minMileage, maxMileage) => {
-      listCarsByMileageRange(minMileage, maxMileage)
+      const response = listCarsByMileageRange(minMileage, maxMileage)
+      response === 0
+        ? console.log(
+            `The dealership has a total of ${response} cars with mileage between ${minMileage} and ${maxMileage}.`,
+          )
+        : console.log(
+            `The dealership has a total of ${response.length} cars with mileage between ${minMileage} and ${maxMileage}. Find them listed below: ${JSON.stringify(response, null, 2)}`,
+          )
     })
 
   cli
