@@ -1,4 +1,8 @@
-import { countCarsByBrand, listCarsByBrand } from '../functions/usecases'
+import {
+  countCarsByBrand,
+  listCarsByBrand,
+  listCarsByMileageRange,
+} from '../functions/usecases'
 import { loadData } from '../data/loadData'
 
 await loadData('./src/data/cars.csv')
@@ -42,5 +46,21 @@ describe('listCarsByBrand', () => {
   it('should return zero for a brand not in the list', () => {
     const count = countCarsByBrand('PROCIMO')
     expect(count).toBe(0)
+  })
+})
+
+describe('listCarsByMileageRange', () => {
+  it('should list cars given a mileage range', async () => {
+    const list = await listCarsByMileageRange(19000, 20000)
+    expect(list.length).toBe(52)
+    expect(list[51].Car).toBe('SEAT')
+    expect(list[51].Dealership).toBe('Cucujães Sport Auto')
+    expect(list[51].Mileage).toBe(19177)
+    expect(list[51].Price).toBe(32489)
+  })
+
+  it('should return zero for a mileage range out of bounds', () => {
+    const list = listCarsByMileageRange(0, 1)
+    expect(list).toBe(0)
   })
 })

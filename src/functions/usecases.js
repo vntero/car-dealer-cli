@@ -39,7 +39,10 @@ export const listCarsByMileageRange = (minMileage, maxMileage) => {
   const filteredCarsByMileageRange = cars.filter(
     (car) => car.Mileage >= minMileage && car.Mileage <= maxMileage,
   )
-  filteredCarsByMileageRange.length === 0 ? 0 : filteredCarsByMileageRange
+
+  return filteredCarsByMileageRange.length === 0
+    ? 0
+    : filteredCarsByMileageRange
 }
 
 export const getTotalValueByDealership = (dealership) => {
