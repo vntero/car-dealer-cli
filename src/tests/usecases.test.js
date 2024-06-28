@@ -27,7 +27,7 @@ describe('listCarsByBrand', () => {
     expect(list[0].Car).toBe('BMW')
     expect(list[0].Dealership).toBe('Santogal Jump')
     expect(list[0].Mileage).toBe(5502)
-    expect(list[0].Price).toBe(10)
+    expect(list[0].Price).toBe(26082)
   })
 
   it('should still list cars of existing brand entered in lowercase', async () => {
@@ -36,7 +36,7 @@ describe('listCarsByBrand', () => {
     expect(list[0].Car).toBe('AUDI')
     expect(list[0].Dealership).toBe('Cucujães Sport Auto')
     expect(list[0].Mileage).toBe(13885)
-    expect(list[0].Price).toBe(10)
+    expect(list[0].Price).toBe(35976)
   })
 
   it('should return zero for a brand not in the list', () => {
