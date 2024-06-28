@@ -59,5 +59,10 @@ export const getTotalValueByDealership = (dealership) => {
     (sum, car) => sum + parseFloat(car.Price),
     0,
   )
-  return filteredCarsByDealership.length === 0 ? 0 : totalValue
+  return filteredCarsByDealership.length === 0
+    ? {
+        count: 0,
+        availableDealerships: uniqueDealerships,
+      }
+    : totalValue
 }
