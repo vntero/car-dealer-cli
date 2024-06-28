@@ -21,7 +21,7 @@ describe('countCarsByBrand', () => {
 
   it('should return zero for a brand not in the list', () => {
     const count = countCarsByBrand('FIELD')
-    expect(count).toBe(0)
+    expect(count.count).toBe(0)
   })
 })
 
@@ -46,7 +46,7 @@ describe('listCarsByBrand', () => {
 
   it('should return zero for a brand not in the list', () => {
     const count = countCarsByBrand('PROCIMO')
-    expect(count).toBe(0)
+    expect(count.count).toBe(0)
   })
 })
 
@@ -86,6 +86,6 @@ describe('getTotalValueByDealership', () => {
 
   it('should return zero for a dealership that does not exist', () => {
     const total = getTotalValueByDealership('Automóveis Aljezur')
-    expect(total).toBe(0)
+    expect(total.count).toBe(0)
   })
 })
